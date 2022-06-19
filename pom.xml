@@ -15,6 +15,7 @@
     <description>MyDemo</description>
     <properties>
         <java.version>17</java.version>
+        <docker_port>8091</docker_port>
         <org.mapstruct.version>1.5.0.Final</org.mapstruct.version>
     </properties>
     <dependencies>
