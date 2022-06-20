@@ -145,7 +145,7 @@ pipeline {
                         }
                     }
                 }
-                sh "docker run --name ${DOCKER_CONTAINER_NAME} -d -p ${DOCKER_PORT}:8080 ${DOCKER_IMAGE}"
+                sh "docker run --name ${DOCKER_CONTAINER_NAME} -d -p ${DOCKER_PORT}:8082 ${DOCKER_IMAGE}"
             }
         }
     }
