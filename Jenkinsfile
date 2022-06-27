@@ -34,7 +34,7 @@ pipeline {
         stage("Maven Build") {
             steps {
                 script {
-                    sh "mvn clean package -Drevision=${currentBuild.number} -Dapi.version=${currentBuild.number}"
+                    sh "mvn clean package -DskipTests -Drevision=${currentBuild.number} -Dapi.version=${currentBuild.number}"
                 }
             }
         }
