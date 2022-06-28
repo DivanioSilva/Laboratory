@@ -148,21 +148,24 @@ public class PersonServiceTest {
     }
 
     @Test
-    @DisplayName("Should return the person when the first name is found")
-    public void testFindByPersonFirstNameWhenFirstNameIsFoundThenReturnThePerson() throws PersonNotFoundException {
+    @DisplayName("Should returns a list of persons when the first name is found")
+    public void testFindByPersonFirstNameWhenFirstNameIsFoundThenReturnsListOfPersons() throws PersonNotFoundException {
         String firstName = "John";
-        Person person = new Person(1L,"John", "Doe", 20);
-        when(personRepository.findByFirstName(firstName)).thenReturn(Optional.of(person));
+        Person person = new Person(1L, firstName, "Doe", 20);
+        List<Person> persons = Arrays.asList(person);
+        when(personRepository.findByFirstName(firstName)).thenReturn(Optional.of(persons));
 
-        PersonDto personDto = personService.findByPersonFirstName(firstName);
+        List<PersonWithIdDto> result = personService.findByPersonFirstName(firstName);
 
-        assertEquals(person.getFirstName(), personDto.getFirstName());
-        assertEquals(person.getLastName(), personDto.getLastName());
-        assertEquals(person.getAge(), personDto.getAge());
+        assertEquals(1, result.size());
+        assertEquals(person.getId(), result.get(0).getId());
+        assertEquals(person.getFirstName(), result.get(0).getFirstName());
+        assertEquals(person.getLastName(), result.get(0).getLastName());
+        assertEquals(person.getAge(), result.get(0).getAge());
     }
 
     @Test
-    @DisplayName("Should throw an exception when the first name is not found")
+    @DisplayName("Should throws an exception when the first name is not found")
     public void testFindByPersonFirstNameWhenFirstNameIsNotFoundThenThrowsException() {
         String firstName = "John";
         when(personRepository.findByFirstName(firstName)).thenReturn(Optional.empty());
